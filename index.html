@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Md. Nurul Alam — Computer Security & Full-Stack Developer</title>
+<meta name="description" content="Portfolio of Md. Nurul Alam — Computer Security, Network Defense, and Full-Stack Development.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B0E14;
+    --bg-panel:#11151C;
+    --bg-panel-2:#161B24;
+    --border:#232938;
+    --text:#E6E9EF;
+    --text-dim:#8B93A1;
+    --accent:#5EEAD4;
+    --accent-soft:rgba(94,234,212,0.12);
+    --accent-2:#F5A623;
+    --radius:10px;
+    --max:1080px;
+    --font-display:'Space Grotesk', sans-serif;
+    --font-body:'Inter', sans-serif;
+    --font-mono:'JetBrains Mono', monospace;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--font-body);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background-image:
+      linear-gradient(rgba(94,234,212,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(94,234,212,0.025) 1px, transparent 1px);
+    background-size:42px 42px;
+    pointer-events:none;
+    z-index:0;
+  }
+
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 24px; position:relative; z-index:1;}
+
+  /* ---------- NAV ---------- */
+  header.site-nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(11,14,20,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);
+  }
+  .nav-inner{
+    max-width:var(--max); margin:0 auto; padding:16px 24px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .logo{
+    font-family:var(--font-mono); font-weight:600; font-size:0.95rem;
+    color:var(--accent); letter-spacing:0.02em;
+  }
+  .logo span{color:var(--text-dim);}
+  nav.links{display:flex; gap:28px; font-family:var(--font-mono); font-size:0.82rem;}
+  nav.links a{color:var(--text-dim); display:flex; align-items:baseline; gap:6px; transition:color 0.2s;}
+  nav.links a:hover{color:var(--accent);}
+  nav.links .port{color:var(--accent-2); font-size:0.72rem;}
+  .nav-cta{
+    font-family:var(--font-mono); font-size:0.78rem; padding:8px 14px;
+    border:1px solid var(--accent); border-radius:6px; color:var(--accent);
+    transition:background 0.2s, color 0.2s;
+  }
+  .nav-cta:hover{background:var(--accent); color:#05151A;}
+  .nav-toggle{display:none; background:none; border:none; color:var(--text); font-size:1.4rem; cursor:pointer;}
+
+  @media (max-width:760px){
+    nav.links{display:none;}
+    .nav-cta{display:none;}
+    .nav-toggle{display:block;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{padding:64px 0 56px; position:relative;}
+  .hero-grid{
+    display:grid; grid-template-columns:1.05fr 0.95fr; gap:48px; align-items:start;
+  }
+  @media (max-width:880px){ .hero-grid{grid-template-columns:1fr;} }
+
+  .eyebrow{
+    font-family:var(--font-mono); font-size:0.78rem; color:var(--accent);
+    letter-spacing:0.06em; text-transform:uppercase; margin-bottom:18px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{content:"●"; color:var(--accent-2); font-size:0.6rem;}
+
+  h1.name{
+    font-family:var(--font-display); font-weight:700;
+    font-size:clamp(2.3rem, 5vw, 3.4rem); line-height:1.05; letter-spacing:-0.01em;
+    margin-bottom:14px;
+  }
+  .role-line{
+    font-family:var(--font-mono); font-size:clamp(0.95rem,1.6vw,1.1rem);
+    color:var(--text-dim); margin-bottom:22px;
+  }
+  .role-line .pipe{color:var(--accent-2); margin:0 8px;}
+
+  .lede{color:var(--text-dim); font-size:1rem; max-width:520px; margin-bottom:28px;}
+
+  .hero-ctas{display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{
+    font-family:var(--font-mono); font-size:0.85rem; padding:12px 20px;
+    border-radius:7px; border:1px solid var(--border); transition:all 0.2s;
+    display:inline-flex; align-items:center; gap:8px;
+  }
+  .btn-primary{background:var(--accent); color:#05151A; border-color:var(--accent);}
+  .btn-primary:hover{background:#7FF3DF;}
+  .btn-ghost{color:var(--text); border-color:var(--border);}
+  .btn-ghost:hover{border-color:var(--accent); color:var(--accent);}
+
+  /* terminal */
+  .terminal{
+    background:var(--bg-panel); border:1px solid var(--border); border-radius:var(--radius);
+    overflow:hidden; box-shadow:0 30px 60px -30px rgba(0,0,0,0.6);
+  }
+  .terminal-bar{
+    display:flex; align-items:center; gap:8px; padding:11px 14px;
+    background:var(--bg-panel-2); border-bottom:1px solid var(--border);
+  }
+  .dot{width:10px; height:10px; border-radius:50%;}
+  .dot.r{background:#FF5F57;} .dot.y{background:#FEBC2E;} .dot.g{background:#28C840;}
+  .terminal-title{
+    margin-left:8px; font-family:var(--font-mono); font-size:0.72rem; color:var(--text-dim);
+  }
+  .terminal-body{
+    padding:20px 18px 22px; font-family:var(--font-mono); font-size:0.82rem;
+    color:#C7D0DC; min-height:300px;
+  }
+  .terminal-body .prompt{color:var(--accent);}
+  .terminal-body .cmd{color:var(--text);}
+  .t-line{white-space:pre-wrap; word-break:break-word;}
+  .t-line.dim{color:var(--text-dim);}
+  .t-line.head{color:var(--accent-2); margin-top:14px; margin-bottom:4px;}
+  .t-line.open{color:var(--accent);}
+  .cursor{display:inline-block; width:7px; height:1em; background:var(--accent); vertical-align:-2px; animation:blink 1s steps(1) infinite;}
+  @keyframes blink{50%{opacity:0;}}
+
+  /* ---------- SECTION SHELL ---------- */
+  section{padding:72px 0; border-top:1px solid var(--border); position:relative;}
+  .section-head{display:flex; align-items:baseline; gap:14px; margin-bottom:36px;}
+  .section-num{font-family:var(--font-mono); color:var(--accent-2); font-size:0.85rem;}
+  h2.section-title{
+    font-family:var(--font-display); font-weight:600; font-size:clamp(1.5rem,3vw,2rem);
+  }
+  .section-sub{color:var(--text-dim); font-size:0.92rem; margin-top:6px; max-width:560px;}
+
+  .reveal{opacity:0; transform:translateY(16px); transition:opacity 0.6s ease, transform 0.6s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{display:grid; grid-template-columns:1.4fr 1fr; gap:48px;}
+  @media (max-width:800px){ .about-grid{grid-template-columns:1fr;} }
+  .about-text p{color:var(--text-dim); margin-bottom:14px; font-size:0.98rem;}
+  .about-text strong{color:var(--text); font-weight:600;}
+
+  .fact-panel{
+    background:var(--bg-panel); border:1px solid var(--border); border-radius:var(--radius);
+    padding:20px;
+  }
+  .fact-row{display:flex; justify-content:space-between; padding:11px 0; border-bottom:1px dashed var(--border); font-size:0.88rem;}
+  .fact-row:last-child{border-bottom:none;}
+  .fact-label{color:var(--text-dim); font-family:var(--font-mono); font-size:0.78rem;}
+  .fact-value{color:var(--text); text-align:right;}
+
+  /* ---------- SKILLS ---------- */
+  .skill-groups{display:grid; gap:22px;}
+  .skill-group{
+    display:grid; grid-template-columns:170px 1fr; gap:18px; align-items:start;
+    padding:16px 0; border-bottom:1px solid var(--border);
+  }
+  .skill-group:last-child{border-bottom:none;}
+  @media (max-width:680px){ .skill-group{grid-template-columns:1fr; gap:8px;} }
+  .skill-cat{font-family:var(--font-mono); color:var(--accent-2); font-size:0.82rem;}
+  .chip-row{display:flex; flex-wrap:wrap; gap:8px;}
+  .chip{
+    font-family:var(--font-mono); font-size:0.78rem; padding:6px 11px;
+    border:1px solid var(--border); border-radius:6px; color:var(--text-dim);
+    transition:all 0.2s;
+  }
+  .chip:hover{border-color:var(--accent); color:var(--accent); background:var(--accent-soft);}
+
+  /* ---------- PROJECTS ---------- */
+  .project-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:22px;}
+  @media (max-width:800px){ .project-grid{grid-template-columns:1fr;} }
+  .project-card{
+    background:var(--bg-panel); border:1px solid var(--border); border-radius:var(--radius);
+    padding:24px; display:flex; flex-direction:column; gap:12px;
+    transition:border-color 0.2s, transform 0.2s;
+  }
+  .project-card:hover{border-color:var(--accent); transform:translateY(-3px);}
+  .project-top{display:flex; justify-content:space-between; align-items:flex-start; gap:12px;}
+  .project-title{font-family:var(--font-display); font-weight:600; font-size:1.08rem;}
+  .project-date{font-family:var(--font-mono); font-size:0.72rem; color:var(--text-dim); white-space:nowrap;}
+  .project-tags{display:flex; flex-wrap:wrap; gap:6px;}
+  .tag{
+    font-family:var(--font-mono); font-size:0.7rem; color:var(--accent);
+    background:var(--accent-soft); padding:4px 9px; border-radius:5px;
+  }
+  .project-desc{list-style:none; color:var(--text-dim); font-size:0.88rem; display:flex; flex-direction:column; gap:6px;}
+  .project-desc li{padding-left:16px; position:relative;}
+  .project-desc li::before{content:"›"; position:absolute; left:0; color:var(--accent-2);}
+
+  /* ---------- SCAN SUMMARY (achievements) ---------- */
+  .scan-summary{
+    background:var(--bg-panel); border:1px solid var(--border); border-radius:var(--radius);
+    overflow:hidden;
+  }
+  .scan-summary-head{
+    font-family:var(--font-mono); font-size:0.75rem; color:var(--text-dim);
+    padding:13px 18px; border-bottom:1px solid var(--border); background:var(--bg-panel-2);
+  }
+  .stat-grid{display:grid; grid-template-columns:repeat(4,1fr);}
+  @media (max-width:760px){ .stat-grid{grid-template-columns:repeat(2,1fr);} }
+  .stat{padding:26px 18px; border-right:1px solid var(--border); border-bottom:1px solid var(--border);}
+  .stat:nth-child(4n){border-right:none;}
+  .stat-num{font-family:var(--font-display); font-size:1.9rem; font-weight:700; color:var(--accent);}
+  .stat-label{font-family:var(--font-mono); font-size:0.72rem; color:var(--text-dim); margin-top:4px;}
+  .achv-list{list-style:none; padding:18px; display:flex; flex-direction:column; gap:10px;}
+  .achv-list li{font-size:0.9rem; color:var(--text-dim); padding-left:18px; position:relative;}
+  .achv-list li::before{content:"✓"; position:absolute; left:0; color:var(--accent);}
+
+  /* ---------- TIMELINE (leadership / education / certs) ---------- */
+  .timeline{display:flex; flex-direction:column;}
+  .t-item{
+    display:grid; grid-template-columns:150px 1fr; gap:20px;
+    padding:20px 0; border-bottom:1px solid var(--border);
+  }
+  .t-item:last-child{border-bottom:none;}
+  @media (max-width:680px){ .t-item{grid-template-columns:1fr; gap:4px;} }
+  .t-date{font-family:var(--font-mono); font-size:0.78rem; color:var(--accent-2);}
+  .t-org{font-weight:600; font-family:var(--font-display); font-size:1.02rem;}
+  .t-role{color:var(--text-dim); font-size:0.85rem; font-style:italic; margin-bottom:6px;}
+  .t-desc{color:var(--text-dim); font-size:0.88rem;}
+
+  /* ---------- LANGUAGES ---------- */
+  .lang-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px;}
+  @media (max-width:680px){ .lang-grid{grid-template-columns:1fr;} }
+  .lang-card{background:var(--bg-panel); border:1px solid var(--border); border-radius:var(--radius); padding:18px;}
+  .lang-name{font-family:var(--font-display); font-weight:600; margin-bottom:8px;}
+  .lang-bar{height:6px; background:var(--bg-panel-2); border-radius:4px; overflow:hidden; margin-bottom:6px;}
+  .lang-fill{height:100%; background:var(--accent); border-radius:4px;}
+  .lang-level{font-family:var(--font-mono); font-size:0.72rem; color:var(--text-dim);}
+
+  /* ---------- CONTACT / FOOTER ---------- */
+  footer{padding:64px 0 40px; border-top:1px solid var(--border);}
+  .contact-grid{display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:32px; margin-bottom:48px;}
+  .contact-title{font-family:var(--font-display); font-size:clamp(1.6rem,4vw,2.4rem); font-weight:700; max-width:480px;}
+  .contact-links{display:flex; flex-direction:column; gap:10px; font-family:var(--font-mono); font-size:0.88rem;}
+  .contact-links a{color:var(--text-dim); transition:color 0.2s;}
+  .contact-links a:hover{color:var(--accent);}
+  .social-row{display:flex; gap:16px; font-family:var(--font-mono); font-size:0.8rem; flex-wrap:wrap;}
+  .social-row a{color:var(--text-dim); border:1px solid var(--border); padding:8px 14px; border-radius:6px; transition:all 0.2s;}
+  .social-row a:hover{color:var(--accent); border-color:var(--accent);}
+  .foot-bottom{
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+    font-family:var(--font-mono); font-size:0.72rem; color:var(--text-dim); padding-top:24px; border-top:1px solid var(--border);
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .reveal{transition:none; opacity:1; transform:none;}
+    .cursor{animation:none;}
+  }
+
+  :focus-visible{outline:2px solid var(--accent); outline-offset:3px;}
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="nav-inner">
+    <div class="logo">reaz<span>@</span>portfolio<span>:~$</span></div>
+    <nav class="links">
+      <a href="#about"><span class="port">4242</span>about</a>
+      <a href="#skills"><span class="port">5353</span>skills</a>
+      <a href="#projects"><span class="port">8000</span>projects</a>
+      <a href="#achievements"><span class="port">2200</span>achievements</a>
+      <a href="#contact"><span class="port">8080</span>contact</a>
+    </nav>
+    <a class="nav-cta" href="#contact">get in touch</a>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero" style="border-top:none;">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow">scan complete · 4 ports open</div>
+        <h1 class="name">Md. Nurul Alam</h1>
+        <div class="role-line">Computer Security<span class="pipe">|</span>Network Defense<span class="pipe">|</span>Full-Stack Dev</div>
+        <p class="lede">Final-year CSE student building things that watch networks closely and applications that run cleanly — from intrusion detection systems to production-style web apps.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="#projects">View projects →</a>
+          <a class="btn btn-ghost" href="#contact">Contact me</a>
+        </div>
+      </div>
+
+      <div class="terminal">
+        <div class="terminal-bar">
+          <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+          <span class="terminal-title">reaz@kali: ~</span>
+        </div>
+        <div class="terminal-body" id="termBody"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== ABOUT ===================== -->
+  <section id="about">
+    <div class="section-head reveal">
+      <span class="section-num">01</span>
+      <div>
+        <h2 class="section-title">whoami</h2>
+        <div class="section-sub">A quick summary, and the hard facts.</div>
+      </div>
+    </div>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>I'm a <strong>final-year Computer Science and Engineering student</strong> at International Islamic University Chittagong, with a focus that splits between two things I keep coming back to: <strong>computer security</strong> and <strong>building real applications</strong>.</p>
+        <p>On the security side, I've worked on <strong>network intrusion detection</strong>, penetration testing, and traffic analysis — the kind of work where you have to think like the thing you're trying to stop. On the development side, I build with <strong>Next.js, Supabase, Django, and Flask</strong>, usually ending up automating something with Python along the way.</p>
+        <p>Lately I've also been getting hands-on with <strong>large language models</strong> — prompt engineering, tool calling, and building agents that can actually act on instructions rather than just respond to them.</p>
+      </div>
+      <div class="fact-panel reveal">
+        <div class="fact-row"><span class="fact-label">LOCATION</span><span class="fact-value">Chittagong, Bangladesh</span></div>
+        <div class="fact-row"><span class="fact-label">EDUCATION</span><span class="fact-value">B.Sc. CSE, IIUC — 02/2026</span></div>
+        <div class="fact-row"><span class="fact-label">FOCUS</span><span class="fact-value">Security & Full-Stack Dev</span></div>
+        <div class="fact-row"><span class="fact-label">EMAIL</span><span class="fact-value">nurulalamreaz@gmail.com</span></div>
+        <div class="fact-row"><span class="fact-label">PHONE</span><span class="fact-value">+880 1881-282720</span></div>
+        <div class="fact-row"><span class="fact-label">STATUS</span><span class="fact-value" style="color:var(--accent);">Open to opportunities</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SKILLS ===================== -->
+  <section id="skills">
+    <div class="section-head reveal">
+      <span class="section-num">02</span>
+      <div>
+        <h2 class="section-title">Tech stack</h2>
+        <div class="section-sub">Everything I reach for, grouped by what it's for.</div>
+      </div>
+    </div>
+    <div class="skill-groups reveal">
+      <div class="skill-group">
+        <span class="skill-cat">languages</span>
+        <div class="chip-row">
+          <span class="chip">Python</span><span class="chip">JavaScript</span><span class="chip">SQL</span><span class="chip">C++</span><span class="chip">HTML5/CSS3</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <span class="skill-cat">web & backend</span>
+        <div class="chip-row">
+          <span class="chip">Next.js</span><span class="chip">React</span><span class="chip">Django</span><span class="chip">Flask</span><span class="chip">FastAPI</span><span class="chip">Supabase</span><span class="chip">Tailwind CSS</span><span class="chip">Microservices</span><span class="chip">Auth & Authorization</span><span class="chip">SSR</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <span class="skill-cat">mobile</span>
+        <div class="chip-row">
+          <span class="chip">Flutter</span><span class="chip">Dart</span><span class="chip">Android Studio</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <span class="skill-cat">security & networking</span>
+        <div class="chip-row">
+          <span class="chip">Penetration Testing</span><span class="chip">Metasploit</span><span class="chip">Nmap</span><span class="chip">Wi-Fi Deauth Attacks</span><span class="chip">Hash Cracking</span><span class="chip">Traffic Analysis</span><span class="chip">Kali Linux</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <span class="skill-cat">tools & practice</span>
+        <div class="chip-row">
+          <span class="chip">Git</span><span class="chip">Linux</span><span class="chip">VirtualBox</span><span class="chip">OOP</span><span class="chip">Design Patterns</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PROJECTS ===================== -->
+  <section id="projects">
+    <div class="section-head reveal">
+      <span class="section-num">03</span>
+      <div>
+        <h2 class="section-title">Projects</h2>
+        <div class="section-sub">Things I've built end to end.</div>
+      </div>
+    </div>
+    <div class="project-grid reveal">
+
+      <div class="project-card">
+        <div class="project-top">
+          <div class="project-title">NIDS — Network Intrusion Detection System</div>
+          <div class="project-date">12/2025 – 01/2026</div>
+        </div>
+        <div class="project-tags"><span class="tag">Python</span><span class="tag">Scapy</span><span class="tag">ML</span><span class="tag">DNS</span></div>
+        <ul class="project-desc">
+          <li>Built a real-time network sniffer and intrusion detection system from scratch.</li>
+          <li>Trained models to flag malicious traffic patterns on a live network.</li>
+          <li>Shipped a live dashboard to monitor and log network activity on Ubuntu.</li>
+        </ul>
+      </div>
+
+      <div class="project-card">
+        <div class="project-top">
+          <div class="project-title">Live Portfolio & System Monitor</div>
+          <div class="project-date">01/2026</div>
+        </div>
+        <div class="project-tags"><span class="tag">Next.js</span><span class="tag">Supabase</span><span class="tag">Bash</span></div>
+        <ul class="project-desc">
+          <li>Built a personal site with a real-time system status display.</li>
+          <li>Used Supabase to stream live hardware metrics from a local Ubuntu box.</li>
+          <li>Engineered a responsive, multi-layer architecture across device types.</li>
+        </ul>
+      </div>
+
+      <div class="project-card">
+        <div class="project-top">
+          <div class="project-title">Tool-Driven AI Agents with Google Gemini</div>
+          <div class="project-date">11/2025 – 12/2025</div>
+        </div>
+        <div class="project-tags"><span class="tag">Python</span><span class="tag">Gemini API</span><span class="tag">ADK</span></div>
+        <ul class="project-desc">
+          <li>Built tool-driven agents with function calling and agent delegation.</li>
+          <li>Implemented a currency converter with validation and code-executed math.</li>
+          <li>Connected external APIs through dynamic function calling and prompting.</li>
+        </ul>
+      </div>
+
+      <div class="project-card">
+        <div class="project-top">
+          <div class="project-title">Spam Email Detection — Deep Learning & NLP</div>
+          <div class="project-date">10/2024 – 11/2024</div>
+        </div>
+        <div class="project-tags"><span class="tag">TensorFlow</span><span class="tag">Pandas</span><span class="tag">Scikit-learn</span></div>
+        <ul class="project-desc">
+          <li>Built a deep learning classifier for spam vs. non-spam emails.</li>
+          <li>Evaluated with precision, recall, and F1-score for balanced results.</li>
+          <li>Reached 99.3% classification accuracy on the test set.</li>
+        </ul>
+      </div>
+
+      <div class="project-card">
+        <div class="project-top">
+          <div class="project-title">Library Management System</div>
+          <div class="project-date">11/2024 – 12/2024</div>
+        </div>
+        <div class="project-tags"><span class="tag">PHP</span><span class="tag">MySQL</span><span class="tag">JavaScript</span></div>
+        <ul class="project-desc">
+          <li>Full-stack system with role-based access for admins and members.</li>
+          <li>Designed relational schemas for books, members, loans, and returns.</li>
+          <li>Added filtered search and sorting across large catalogs.</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================== ACHIEVEMENTS / SCAN SUMMARY ===================== -->
+  <section id="achievements">
+    <div class="section-head reveal">
+      <span class="section-num">04</span>
+      <div>
+        <h2 class="section-title">Competitive programming</h2>
+        <div class="section-sub">A summary of the grind, scanned and tabulated.</div>
+      </div>
+    </div>
+
+    <div class="scan-summary reveal">
+      <div class="scan-summary-head">$ cat ~/competitive_programming/summary.log</div>
+      <div class="stat-grid">
+        <div class="stat"><div class="stat-num">797</div><div class="stat-label">CODEFORCES MAX RATING</div></div>
+        <div class="stat"><div class="stat-num">1000+</div><div class="stat-label">PROBLEMS SOLVED</div></div>
+        <div class="stat"><div class="stat-num">2×</div><div class="stat-label">3RD PRIZE, INTRA-UNIV CONTESTS</div></div>
+        <div class="stat"><div class="stat-num">Newbie</div><div class="stat-label">CODEFORCES RANK</div></div>
+      </div>
+      <ul class="achv-list">
+        <li>Active on Codeforces, LeetCode, and AtCoder, with 1000+ problems solved across judges.</li>
+        <li>3rd Prize — Intra University Junior Programming Contest, June 2022.</li>
+        <li>3rd Prize — Intra University Rating-Based Programming Contest, December 2024.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===================== LEADERSHIP ===================== -->
+  <section id="leadership">
+    <div class="section-head reveal">
+      <span class="section-num">05</span>
+      <div>
+        <h2 class="section-title">Leadership & education</h2>
+        <div class="section-sub">Where I've taught, organized, and studied.</div>
+      </div>
+    </div>
+    <div class="timeline reveal">
+      <div class="t-item">
+        <div class="t-date">02/2025 – 08/2025</div>
+        <div>
+          <div class="t-org">IIUC Competitive Programming Society</div>
+          <div class="t-role">Bootcamp Coordinator</div>
+          <div class="t-desc">Coordinated a 6-month bootcamp — instructor logistics, contest organizing, and digital resource management for the society.</div>
+        </div>
+      </div>
+      <div class="t-item">
+        <div class="t-date">12/2019 – Present</div>
+        <div>
+          <div class="t-org">Service for Humanity</div>
+          <div class="t-role">Founding Member</div>
+          <div class="t-desc">Co-founded a volunteer organization for community service. Lead digital initiatives and coordinate volunteer outreach.</div>
+        </div>
+      </div>
+      <div class="t-item">
+        <div class="t-date">Graduating 02/2026</div>
+        <div>
+          <div class="t-org">International Islamic University Chittagong</div>
+          <div class="t-role">B.Sc. in Computer Science and Engineering</div>
+          <div class="t-desc">Coursework: Algorithms & Data Structures, Databases, Web Development, Software Engineering, Computer Security, Machine Learning, OOP.</div>
+        </div>
+      </div>
+      <div class="t-item">
+        <div class="t-date">08/2024 – 12/2024</div>
+        <div>
+          <div class="t-org">Flutter Android App Development Certification</div>
+          <div class="t-role">CUET, under EDGE — Bangladesh Computer Council</div>
+          <div class="t-desc">Cross-platform app development with Flutter and Dart — UI design, state management, and API integration.</div>
+        </div>
+      </div>
+      <div class="t-item">
+        <div class="t-date">03/2018 – 06/2018</div>
+        <div>
+          <div class="t-org">Computer Office Application & Graphics Design</div>
+          <div class="t-role">Dagonbhuiyan Science & Engineering Institute</div>
+          <div class="t-desc">Foundational training in office applications, graphics design, freelancing, and digital marketing.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== LANGUAGES ===================== -->
+  <section id="languages">
+    <div class="section-head reveal">
+      <span class="section-num">06</span>
+      <div>
+        <h2 class="section-title">Languages</h2>
+      </div>
+    </div>
+    <div class="lang-grid reveal">
+      <div class="lang-card">
+        <div class="lang-name">English</div>
+        <div class="lang-bar"><div class="lang-fill" style="width:90%;"></div></div>
+        <div class="lang-level">Fluent</div>
+      </div>
+      <div class="lang-card">
+        <div class="lang-name">Bangla</div>
+        <div class="lang-bar"><div class="lang-fill" style="width:100%;"></div></div>
+        <div class="lang-level">Native</div>
+      </div>
+      <div class="lang-card">
+        <div class="lang-name">Urdu / Hindi</div>
+        <div class="lang-bar"><div class="lang-fill" style="width:55%;"></div></div>
+        <div class="lang-level">Conversational</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===================== CONTACT / FOOTER ===================== -->
+<footer id="contact">
+  <div class="wrap">
+    <div class="contact-grid reveal">
+      <div class="contact-title">Open to security and full-stack roles — let's talk.</div>
+      <div class="contact-links">
+        <a href="mailto:nurulalamreaz@gmail.com">nurulalamreaz@gmail.com</a>
+        <a href="tel:+8801881282720">+880 1881-282720</a>
+        <span style="color:var(--text-dim);">Chittagong, Bangladesh</span>
+      </div>
+    </div>
+    <div class="social-row reveal">
+      <a href="#" title="Replace with your GitHub URL">GitHub</a>
+      <a href="#" title="Replace with your LinkedIn URL">LinkedIn</a>
+      <a href="#" title="Replace with your LeetCode URL">LeetCode</a>
+      <a href="#" title="Replace with your Codeforces URL">Codeforces</a>
+      <a href="#" title="Replace with your Kaggle URL">Kaggle</a>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Md. Nurul Alam</span>
+      <span>scan finished in 0.04s</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Terminal typing sequence
+  const lines = [
+    {text:"$ whoami", cls:"cmd", pause:300},
+    {text:"reaz — final-year CSE student, Chittagong", cls:"dim", pause:200},
+    {text:"$ nmap -sV --script=career reaz.dev", cls:"cmd", pause:500},
+    {text:"Starting Nmap scan at " + "2026-06-22", cls:"dim", pause:150},
+    {text:"PORT     STATE  SERVICE       VERSION", cls:"head", pause:150},
+    {text:"4242/tcp open   about         final-year CSE student", cls:"open", pause:150},
+    {text:"5353/tcp open   skills        security + full-stack dev", cls:"open", pause:150},
+    {text:"8000/tcp open   projects      NIDS, AI agents, web apps", cls:"open", pause:150},
+    {text:"8080/tcp open   contact       open to opportunities", cls:"open", pause:150},
+    {text:"Nmap done: 4 ports open.", cls:"dim", pause:0},
+  ];
+
+  const term = document.getElementById('termBody');
+  let li = 0, ci = 0;
+
+  function typeNext(){
+    if(li >= lines.length){
+      const cur = document.createElement('span');
+      cur.className = 'cursor';
+      term.appendChild(cur);
+      return;
+    }
+    const lineDef = lines[li];
+    let div = term.querySelector('.t-line-active');
+    if(!div){
+      div = document.createElement('div');
+      div.className = 't-line t-line-active ' + lineDef.cls;
+      term.appendChild(div);
+    }
+    if(ci < lineDef.text.length){
+      div.textContent += lineDef.text[ci];
+      ci++;
+      setTimeout(typeNext, 12);
+    } else {
+      div.classList.remove('t-line-active');
+      li++; ci = 0;
+      setTimeout(typeNext, lineDef.pause);
+    }
+  }
+  typeNext();
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {threshold:0.12});
+  reveals.forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
